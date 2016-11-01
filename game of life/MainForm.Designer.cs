@@ -72,7 +72,7 @@
             this.label_draw.Name = "label_draw";
             this.label_draw.Size = new System.Drawing.Size(30, 13);
             this.label_draw.TabIndex = 1;
-            this.label_draw.Text = "drow";
+            this.label_draw.Text = "draw";
             // 
             // label_step
             // 

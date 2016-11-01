@@ -18,7 +18,7 @@ namespace Game_of_Life {
         int alive, stable;
         ulong frame;
 
-        bool drow = false;
+        bool draw = false;
         int pen = 1, pen_width = 1, max_pen_width = 100;
         SolidBrush pen_color = new SolidBrush(Color.Lime);
         Random rand = new Random();
@@ -35,7 +35,7 @@ namespace Game_of_Life {
             label_born.Text = "рождение: "+ string.Join(", ", born);
             timer.Tick += Step;
             timer.Interval = 1;
-            resize(250, 200, 3);
+            resize(400, 300, 2);
             CenterToScreen();
             Step();
         }
@@ -143,7 +143,7 @@ namespace Game_of_Life {
             for(int x = 0; x < map_width; x++) {
                 for(int y = 0; y < map_height; y++) {
                     if(map[x, y] == 1)
-                        g.FillRectangle(pen_color, x * cell_size, y * cell_size, cell_size, cell_size);
+                        g.FillRectangle(pen_color, x * cell_size + 1, y * cell_size + 1, cell_size - 1, cell_size - 1);
                 }
             }
             SW.Stop();
@@ -176,20 +176,20 @@ namespace Game_of_Life {
         }
         
         private void pictureBox1_MouseDown(object sender, MouseEventArgs e) {
-            drow = true;
+            draw = true;
             if(e.Button == MouseButtons.Left) pen = 1;
             else if(e.Button == MouseButtons.Right) pen = 0;
             pictureBox1_MouseMove(sender, e);
         }
 
         private void pictureBox1_MouseUp(object sender, MouseEventArgs e) {
-            drow = false;
+            draw = false;
         }
 
         private void pictureBox1_MouseMove(object sender, MouseEventArgs e) {
             label_x.Text = string.Format("x: {0}", e.X/cell_size);
             label_y.Text = string.Format("y: {0}", e.Y / cell_size);
-            if(drow) {
+            if(draw) {
                 int x = e.X / cell_size;
                 int y = e.Y / cell_size;
                 for(int xx = x - (pen_width - pen_width % 2) / 2 + (1 - pen_width % 2); xx <= x + (pen_width - pen_width % 2) / 2; xx++) {
